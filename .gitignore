@@ -1,0 +1,6 @@
+/pagerank
+/Proj
+/temp
+hidden.py
+*.sqlite
+__pycache__
