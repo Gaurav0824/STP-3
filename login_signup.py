@@ -8,7 +8,9 @@ class login_signup:
 
     def __init__(self):
 
-        conn = sqlite3.connect(login_signup.APP_ROOT+'\\accounts.sqlite')
+        print(login_signup.APP_ROOT+'/accounts.sqlite')
+
+        conn = sqlite3.connect(login_signup.APP_ROOT+'/accounts.sqlite')
         cur = conn.cursor()
         cur.execute('''CREATE TABLE IF NOT EXISTS UserData( 
                                     sno INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +26,7 @@ class login_signup:
         """
         login_details : dictionary
         """
-        conn = sqlite3.connect(login_signup.APP_ROOT+'\\accounts.sqlite')
+        conn = sqlite3.connect(login_signup.APP_ROOT+'/accounts.sqlite')
         cur = conn.cursor()
         cur.execute('SELECT sno,fname,lname FROM UserData WHERE email=? AND pwd = ?',
                     (login_details['email'], login_details['pwd'], ))
@@ -51,7 +53,7 @@ class login_signup:
 
     def signup_user(self, signup_details):
 
-        conn = sqlite3.connect(login_signup.APP_ROOT+'\\accounts.sqlite')
+        conn = sqlite3.connect(login_signup.APP_ROOT+'/accounts.sqlite')
         cur = conn.cursor()
         cur.execute('SELECT sno FROM UserData WHERE email=? ',
                     (signup_details['email'],))

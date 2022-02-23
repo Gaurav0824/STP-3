@@ -22,7 +22,7 @@ def gettwfriends(acct, count):
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
 
-    conn = sqlite3.connect(APP_ROOT+'\\friends.sqlite')
+    conn = sqlite3.connect(APP_ROOT+'/friends.sqlite')
     cur = conn.cursor()
 
     cur.execute('''CREATE TABLE IF NOT EXISTS People
@@ -105,7 +105,10 @@ def gettwfriends(acct, count):
 
         data = connection.read().decode()
         headers = dict(connection.getheaders())
-        print('Remaining', headers['x-rate-limit-remaining'])
+        # print(json.dumps(json.loads(data), indent=4))
+        # print(connection.getheaders())
+        print(json.dumps(dict(connection.getheaders()) , indent=4))
+        # print('Remaining', headers['X-Rate-Limit-Remaining'])
 
         try:
             js = json.loads(data)
@@ -144,14 +147,14 @@ def gettwfriends(acct, count):
         cur.execute('''INSERT OR IGNORE INTO Follows (from_id, to_id)
                     VALUES (?, ?)''', (id, id))
         print('New accounts=', countnew, ' revisited=', countold)
-        print('Remaining', headers['x-rate-limit-remaining'])
         conn.commit()
+        print('Remaining', headers['X-Rate-Limit-Remaining'])
         acct = ""
     cur.close()
 
 def clear():
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-    conn = sqlite3.connect(APP_ROOT+'\\friends.sqlite')
+    conn = sqlite3.connect(APP_ROOT+'/friends.sqlite')
     cur = conn.cursor()
     cur.execute('''DROP TABLE IF EXISTS People''')
     cur.execute('''DROP TABLE IF EXISTS Follows''')

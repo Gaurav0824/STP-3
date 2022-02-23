@@ -6,9 +6,9 @@ import os
 def jointwfriendsgraph():
 
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-    APP_TEMPLATE = os.path.join(APP_ROOT, 'Templates')
+    APP_TEMPLATE = os.path.join(APP_ROOT, 'templates')
 
-    conn = sqlite3.connect(APP_ROOT+'\\friends.sqlite')
+    conn = sqlite3.connect(APP_ROOT+'/friends.sqlite')
     cur = conn.cursor()
 
     print("Creating JSON output on friends.js...")
@@ -16,12 +16,12 @@ def jointwfriendsgraph():
     try:
         cur.execute('''SELECT COUNT(from_id) as inbound,to_id,name FROM People JOIN Follows ON People.id=Follows.to_id GROUP BY id ORDER BY id,inbound''')
     except:
-        graph = open(APP_TEMPLATE+'\graph.json', 'w')  # ===================
+        graph = open(APP_TEMPLATE+'/graph.json', 'w')  # ===================
         graph.write('')
         graph.close()
         return
         
-    graph = open(APP_TEMPLATE+'\graph.json', 'w')  # ===================
+    graph = open(APP_TEMPLATE+'/graph.json', 'w')  # ===================
 
     nodes = list()
     for row in cur:

@@ -73,7 +73,7 @@ def profile(name):
     profile_tweets = "https://twitter.com/"+name+"?ref_src=twsrc%5Etfw"
     likes_tweets = "https://twitter.com/"+name+"/likes?ref_src=twsrc%5Etfw"
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-    conn = sqlite3.connect(APP_ROOT+'\\friends.sqlite')
+    conn = sqlite3.connect(APP_ROOT+'/friends.sqlite')
     cur = conn.cursor()
     cur.execute("SELECT data FROM People where name = ? ", (name,))
     try:
@@ -91,7 +91,7 @@ def profile(name):
 def monitor():
     name = ''
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-    conn = sqlite3.connect(APP_ROOT+'\\friends.sqlite')
+    conn = sqlite3.connect(APP_ROOT+'/friends.sqlite')
     cur = conn.cursor()
 
     if request.method == 'POST':
@@ -114,7 +114,7 @@ def monitor():
 
     # profile_tweets = "https://twitter.com/"+name+"?ref_src=twsrc%5Etfw"
     # likes_tweets = "https://twitter.com/"+name+"/likes?ref_src=twsrc%5Etfw"
-
+    cur.execute('''CREATE TABLE IF NOT EXISTS monitor ( name TEXT )''')
     cur.execute('SELECT * FROM monitor')
     data = cur.fetchall()
     profile = []
@@ -134,10 +134,10 @@ def htmllab():
     if request.method == 'POST':
         data = str(request.form.get('code'))
         print(data)
-        with open(APP_ROOT+'\Templates\\temp.html', 'w') as file:
+        with open(APP_ROOT+'/templates/temp.html', 'w') as file:
             file.write(data)
         return render_template('htmllab.html', data=data)
-    with open(APP_ROOT+'\Templates\\temp.html', 'w') as file:
+    with open(APP_ROOT+'/templates/temp.html', 'w') as file:
         file.write('')
     return render_template('htmllab.html')
 
