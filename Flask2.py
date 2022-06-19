@@ -136,7 +136,7 @@ def htmllab():
         print(data)
         with open(APP_ROOT+'/templates/temp.html', 'w') as file:
             file.write(data)
-        return render_template('htmllab.html', data=data)
+        return render_template('htmllab.html', data=data.strip())
     with open(APP_ROOT+'/templates/temp.html', 'w') as file:
         file.write('')
     return render_template('htmllab.html')

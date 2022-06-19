@@ -148,7 +148,7 @@ def gettwfriends(acct, count):
                     VALUES (?, ?)''', (id, id))
         print('New accounts=', countnew, ' revisited=', countold)
         conn.commit()
-        print('Remaining', headers['X-Rate-Limit-Remaining'])
+        print('Remaining', headers['x-rate-limit-remaining'])
         acct = ""
     cur.close()
 

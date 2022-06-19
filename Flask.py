@@ -37,9 +37,9 @@ def d3v2():
     return render_template('https://d3js.org/d3.v2.js')
 
 
-@app.route('/<name>')
-def home4(name):
-    return str(json.dumps(json.loads(nodes[0][3].decode()), indent=4))
+# @app.route('/<name>')
+# def home4(name):
+#     return str(json.dumps(json.loads(nodes[0][3].decode()), indent=4))
 
 
 def map_func(name):
