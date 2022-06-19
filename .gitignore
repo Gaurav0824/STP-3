@@ -1,7 +1,6 @@
 /pagerank
 /Proj
 /temp
-hidden.py
 *.sqlite
 __pycache__
 .env
